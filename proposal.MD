@@ -29,16 +29,6 @@ In addition, this project will include:
 
 ### Wireframes
 
-This app will consist of a single screen with the simulation canvas, playback controls, probabilities controls, instrument selectors and nav links to the Github, my LinkedIn, and the About and Details modals.  
-
-The simulation canvas will include a dropdown for selecting the initial color of the creation object. Users will click and drag to create objects of a certain size and vector angle.
-
-Playback controls along the top will include Start, Pause, Restart and Reset buttons.
-
-On the left, there will be an expandable menu allowing the user to control the sound event transition matrix and the color evolution matrix.
-
-On the left near the bottom, will be an expandable menu allowing users to select the 'instruments'.
-
 ![wireframes](https://i.imgur.com/IbQmMI0.png)
 
 ### Architecture and Technologies
