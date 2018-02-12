@@ -39,7 +39,7 @@ On the left, there will be an expandable menu allowing the user to control the s
 
 On the left near the bottom, will be an expandable menu allowing users to select the 'instruments'.
 
-![wireframes](js_wireframes.png)
+![wireframes](https://i.imgur.com/IbQmMI0.png)
 
 ### Architecture and Technologies
 
