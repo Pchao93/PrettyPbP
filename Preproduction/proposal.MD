@@ -16,12 +16,16 @@ Additionally, users are able to pause and play the feed, and choose if they woul
 
 In PrettyPbP, users will be able to:
 
-- [ ] Display a table of play by play data in an attractive way
-- [ ] Actively add new plays as they would occur in the flow of the game
-- [ ] Allow users to choose games to display
-- [ ] Start, pause, and restart the play by play
-- [ ] Generate a box score dynamically from the play by play data (Bonus)
-- [ ] Insert highlights for each play (Bonus)
+- [ ] Create asteroids of custom size, color, and velocity vector
+- [ ] Hear sounds on collisions
+- [ ] Randomly seed the initial state for demoing or exploration purposes
+- [ ] Start, pause, restart, and reset the simulation
+- [ ] Select from a list of 'instruments' that will serve as the bases for sound events.
+
+In addition, this project will include:
+
+- [ ] An About modal describing the basic functionality
+- [ ] A Details modal delving into the specific implementation of Markov chains
 
 ### Wireframes
 
@@ -31,9 +35,9 @@ In PrettyPbP, users will be able to:
 
 This project will be implemented with the following technologies:
 
-- Vanilla JavaScript for overall structure and logic, DOM manipulation, and rendering,
+- Vanilla JavaScript for overall structure and logic,
+- `D3` for DOM manipulation and rendering,
 - Webpack to bundle and serve up the various scripts.
-- The NBA stats API to gather the required data. 
 
 In addition to the webpack entry file, there will be up to three scripts involved in this project:
 
@@ -51,8 +55,8 @@ In addition to the webpack entry file, there will be up to three scripts involve
 
 **Day 1**: Setup all necessary Node modules, including getting webpack up and running.  Create `webpack.config.js` as well as `package.json`.  Write a basic entry file and the parsing of data for the required NBA endpoints.  Learn the basics of the NBA stats API.  Goals for the day:
 
-- [x] Get `webpack` serving files and frame out index.html
-- [x] Learn enough NBA stats play by play API to render a static but properly formatted table to the site along with other relevant information.
+- [ ] Get `webpack` serving files and frame out index.html
+- [ ] Learn enough NBA stats play by play API to render a static but properly formatted table to the site along with other relevant information.
 - [ ] Write basic box-score functionality that can read the play by play log to generate and update content. 
 
 **Day 2**: Dedicate this day to making sure the format of the data is properly styled.  First, build out each row to adequately present the most important information about each play.  Then, build out the entire table to organize and arrange the data to express which team the play was for. Goals for the day:

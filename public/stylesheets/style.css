@@ -1,0 +1,260 @@
+body {
+  /* border: 1px solid black; */
+  /* background: #fff; */
+  padding: 30px;
+
+}
+
+.left-background {
+  position: fixed;
+  top: -500px;
+  bottom: -200px;
+  left: -200px;
+  width: calc(50% + 200px);
+  background: #FFCD34;
+  z-index: -1;
+}
+
+.right-background {
+  background: #041E42;
+  position: fixed;
+  top: -500px;
+  bottom: -200px;
+  right: -200px;
+  width: calc(50% + 200px);
+
+  z-index: -1;
+}
+
+.basketball-background {
+  /* Basketball Court by Hea Poh Lin from the Noun Project */
+  background-image: url('./noun_485956_cc.svg');
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 85px;
+  bottom: 0px;
+  left: 200px;
+  right: 200px;
+  background-size: cover;
+  /* background-size: 50% 50%; */
+  z-index: -1;
+}
+.table-container {
+  width: 800px;
+  margin: 0 auto;
+
+}
+
+.header-tabs {
+  margin: 0 auto;
+  width: 750px;
+  display: flex;
+  justify-content: space-around;
+  /* background: rgba(0,0,0,0.02); */
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 2px 2px -2px rgba(0,0,0,.04), 0 1px 4px 0 rgba(0,0,0,0.2);
+
+}
+.header-tab {
+  text-align: center;
+  padding: 20px;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  width: 50%;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px;
+  font-size: 44px;
+  /* margin: 10px 0; */
+}
+
+.controls-container div:hover {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.controls-container div {
+  color: white;
+
+}
+
+i {
+  text-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4);
+
+}
+
+.controls-container span {
+  padding: 10px;
+  font-size: 24px;
+  vertical-align: center;
+}
+
+.speed-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 125px;
+}
+
+.speed-display:hover {
+  cursor: auto;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.pbp-table {
+  /* background: rgba(0, 0, 0, 0.4); */
+
+  width: 750px;
+  /* padding-right: 10px; */
+  overflow: visible;
+  /* height: 1500px; */
+  display: block;
+  /* overflow-x: hidden; */
+  overflow-y: scroll;
+  font-size: 24px;
+  padding: 0 30px;
+  margin: 30px auto;
+  /* background: #fff; */
+  border-collapse: collapse;
+  /* box-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4); */ */
+
+  /* box-sizing: border-box; */
+  /* background: rgba(255, 255, 255, 0.3); */
+
+  bottom: 0px;
+}
+td.pbp-table-cell {
+  padding: 5px 5px;
+  max-height:75px;
+  height:75px;
+  width: 290px;
+  /* min-width: 300px; */
+  box-sizing: border-box;
+
+  color: #fff;
+}
+
+td.pbp-table-cell:hover {
+  font-weight: 500;
+}
+
+td.pbp-table-cell-time-score {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  max-width: 150px;
+  height:75px;
+  min-height:75px;
+  color: #fff;
+
+
+
+}
+
+.gameTime {
+  text-align: center;
+}
+
+.quarter-label {
+  margin-right: -7px;
+}
+
+.game-score {
+  font-size: 36px;
+  /* color: #fff; */
+  /* text-align: center; */
+  font-weight: 700;
+}
+
+.pbp-table-cell-time-score span {
+  text-align: center;
+
+  /* height: 24px; */
+  color: #fff;
+}
+
+tr {
+  /* border: 1px solid black; */
+  display: table;
+}
+
+.pbp-table-row {
+
+  vertical-align: text-top;
+  text-align: center;
+  width: 100%;
+  /* box-sizing: border-box; */
+  /* border-bottom: 1px solid black; */
+  height:75px;
+  max-height:75px;
+
+  /* padding-bottom: 100px; */
+  margin-bottom: 10px;
+  /* background: #fff; */
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4);
+  border-radius: 5px;
+  transition: transform, .2s, visibility: 2s;
+}
+
+.pbp-table-row:hover {
+  transform: scale(1.05);
+
+}
+
+.quarter-label {
+  font-size: 24px;
+  font-weight: 700;
+}
+.fa:hover {
+  color: #fff;
+}
+
+/* Animation code taken from stack overflow. Staggered transitions by me.
+https://stackoverflow.com/questions/11679567/using-css-for-fade-in-effect-on-page-load */
+.pbp-table-row, td.pbp-table-cell, td.pbp-table-cell-time-score {
+    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 1s; /* Firefox < 16 */
+        -ms-animation: fadein 1s; /* Internet Explorer */
+         -o-animation: fadein 1s; /* Opera < 12.1 */
+            animation: fadein 1s;
+            -webkit-animation-fill-mode: none; //Changed from both to initial
+            animation-fill-mode: none; /*Changed from both to initial */
+            -webkit-backface-visibility: hidden;
+
+
+
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyeframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
