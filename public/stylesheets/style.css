@@ -28,7 +28,7 @@ body {
 
 .basketball-background {
   /* Basketball Court by Hea Poh Lin from the Noun Project */
-  background-image: url('./noun_485956_cc.svg');
+  background-image: url('./noun_485956_cc_white.svg');
   background-repeat: no-repeat;
   position: fixed;
   top: 85px;
@@ -73,16 +73,17 @@ body {
 
 .controls-container div:hover {
   cursor: pointer;
-  font-weight: 700;
+
 }
 
 .controls-container div {
-  color: white;
+  color: #fff;
+  text-shadow: 1px 1px 1px #ccc;
 
 }
 
 i {
-  text-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4);
+  /* text-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4); */
 
 }
 
@@ -107,8 +108,9 @@ i {
 }
 .pbp-table {
   /* background: rgba(0, 0, 0, 0.4); */
-
+  height: 100%;
   width: 750px;
+  overflow-y: scroll;
   /* padding-right: 10px; */
   overflow: visible;
   /* height: 1500px; */

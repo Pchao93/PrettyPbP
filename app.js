@@ -47,6 +47,8 @@ app.get('/api/playbyplay/:gameId', (req, res) => {
 
 });
 
+// http://data.nba.net/10s/prod/v1/20180212/scoreboard.json
+
 app.listen(PORT, () => {
   console.log(__dirname);
   console.log(`listening on ${PORT}`);

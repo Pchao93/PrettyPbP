@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   speed = 4;
   scores = [0, 0];
+
   let gameId = '0021700494';
   fetch(`/api/playbyplay/${gameId}`).then((res) =>{
     return res.json();
@@ -28,13 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
     root.appendChild(tableContainer);
     let rowsData = res.resultSets[0].rowSet;
     let table = createTable();
-    tableContainer.appendChild(table)
-    sleeper(1000)().then(()=> {
+    tableContainer.appendChild(table);
+    // sleeper(1000)().then(()=> {
       updateTable(table, rowsData).then(table => {
         console.log('first', table);
-        tableContainer.appendChild(table)
+        tableContainer.appendChild(table);
+
       });
-    })
+    // })
 
 
 
@@ -57,8 +59,12 @@ const createControls = function() {
   // speedDisplay.classList.add('speed-display');
   pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>';
   pausePlayButton.addEventListener('click', ()=> {
+    // let remainingTime = getTime(currentTimeout);
+
     play = !play;
     if (play) {
+      // clearTimeout(currentTimeout);
+
       pausePlayButton.innerHTML = '<i class="far fa-pause-circle"></i>'
     } else {
       pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>'
@@ -122,17 +128,18 @@ async function updateTable(table, rowsData) {
       console.log("after");
     }
     let rowArray = rowsData[i];
-    let newTime = calculateTimeOut(rowArray[6], rowArray[4]) / speed
-    let row = await sleeper(newTime - oldTime)().then(() => createRow(rowArray));
+    let newTime = calculateTimeOut(rowArray[6], rowArray[4]);
+
+    
+    let row = await sleeper((newTime - oldTime)/ speed)().then(() => createRow(rowArray));
     table.prepend(row);
-    console.log('row');
       if (i === rowsData.length - 1) {
         setTimeout(() => table.prepend(createFinalRow()), 250);
       }
     oldTime = newTime;
     i++;
   };
-  console.log(table);
+
   return table;
 }
 
@@ -188,7 +195,7 @@ const calculateTimeOut = function(timeString, period) {
 
 function sleeper(time) {
   return function(x) {
-    return new Promise(resolve => setTimeout(() => resolve(x), time));
+    return new Promise(resolve => currentTimeout = setTimeout(() => resolve(x), time));
   };
 }
 
