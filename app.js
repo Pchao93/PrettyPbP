@@ -14,6 +14,43 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
+app.get('/dog', async (req, res) => {
+  // let highlightURL = await grabHighlight(req.params.gameId, req.params.eventId);
+  let highlightURL = await grabHighlight(0021700833, 4);
+
+  res.send(highlightURL);
+
+});
+
+const {Builder, By, Key, until} = require('selenium-webdriver');
+
+async function grabHighlight(gameId, eventId) {
+  let driver = await new Builder().forBrowser('chrome').build();
+  let video;
+  let src;
+  try {
+    await driver.get('https://stats.nba.com/events/?flag=1&GameID=0021700833&GameEventID=4&Season=2017-18&sct=plot');
+    await driver.wait(until.elementLocated(By.id('statsPlayer_embed_statsPlayer')), 10000);
+    video = await driver.findElement(By.id('statsPlayer_embed_statsPlayer')) //.sendKeys('webdriver', Key.RETURN);
+    console.log(video);
+    if (video) {
+      src = video.getAttribute('src').then(result => {
+        return result;
+      });
+    }
+    console.log(src);
+    // await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
+  } finally {
+    await driver.quit();
+    if (src) {
+      console.log('src', src);
+      console.log("I happen at all!");
+      return src;
+    }
+    console.log('I should always happen!');
+  }
+};
+
 
 
 app.get('/api/playbyplay/:gameId', (req, res) => {
@@ -63,7 +100,7 @@ app.get('/api/games/:date', (req, res) => {
         // console.log(typeof body);
         // console.log(body.length);
         // console.log(JSON.parse(body));
-        
+
         res.send(results);
     });
 

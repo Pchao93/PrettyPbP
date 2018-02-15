@@ -18,6 +18,7 @@
     "eslint": "^4.17.0",
     "express": "^4.15.3",
     "node-fetch": "^1.7.3",
+    "selenium-webdriver": "^4.0.0-alpha.1",
     "webpack": "^3.4.1"
   },
   "devDependencies": {

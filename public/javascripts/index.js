@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const root = document.getElementById('root');
   start = false;
-  speed = 4;
+  speed = 8;
   timer;
   let games = await fetchGames('0115');
   let controls = createControls();
