@@ -25,7 +25,7 @@ app.get('/dog', async (req, res) => {
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
 async function grabHighlight(gameId, eventId) {
-  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+  chrome_bin = process.env.GOOGLE_CHROME_SHIM;
 
   chrome_opts = chrome_bin ? {
     "chromeOptions": {
