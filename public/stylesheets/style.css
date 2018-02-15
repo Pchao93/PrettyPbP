@@ -11,12 +11,12 @@ body {
   bottom: -200px;
   left: -200px;
   width: calc(50% + 200px);
-  background: #FFCD34;
+
   z-index: -1;
 }
 
 .right-background {
-  background: #041E42;
+
   position: fixed;
   top: -500px;
   bottom: -200px;
@@ -28,7 +28,7 @@ body {
 
 .basketball-background {
   /* Basketball Court by Hea Poh Lin from the Noun Project */
-  background-image: url('./noun_485956_cc_white.svg');
+  /* background-image: url('./noun_485956_cc_white.svg'); */
   background-repeat: no-repeat;
   position: fixed;
   top: 85px;
@@ -46,15 +46,23 @@ body {
 }
 
 .header-tabs {
-  margin: 0 auto;
+  margin: 20px auto;
   width: 750px;
   display: flex;
   justify-content: space-around;
+  transition: transform .2s;
   /* background: rgba(0,0,0,0.02); */
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 2px 2px -2px rgba(0,0,0,.04), 0 1px 4px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,.4), 0 1px 4px 0 rgba(0,0,0,0.4);
 
 }
+
+.header-tabs:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
 .header-tab {
+  text-shadow: 0px 0px 1px #000;
+
   text-align: center;
   padding: 20px;
   font-size: 36px;
@@ -67,8 +75,8 @@ body {
   display: flex;
   justify-content: space-around;
   padding: 0 10px;
-  font-size: 44px;
-  /* margin: 10px 0; */
+  font-size: 56px;
+  margin: 20px 0;
 }
 
 .controls-container div:hover {
@@ -78,12 +86,12 @@ body {
 
 .controls-container div {
   color: #fff;
-  text-shadow: 1px 1px 1px #ccc;
+  /* text-shadow: 1px 1px 1px #ccc; */
 
 }
 
-i {
-  /* text-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4); */
+div svg.fa-play-circle {
+  /* text-shadow: 3px 3px 16px #272634; */
 
 }
 
@@ -119,7 +127,7 @@ i {
   overflow-y: scroll;
   font-size: 24px;
   padding: 0 30px;
-  margin: 30px auto;
+  margin: 10px auto;
   /* background: #fff; */
   border-collapse: collapse;
   /* box-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4); */ */
@@ -137,11 +145,11 @@ td.pbp-table-cell {
   /* min-width: 300px; */
   box-sizing: border-box;
 
-  color: #fff;
+  color: #000;
 }
 
 td.pbp-table-cell:hover {
-  font-weight: 500;
+  /* font-weight: 500; */
 }
 
 td.pbp-table-cell-time-score {
@@ -151,7 +159,7 @@ td.pbp-table-cell-time-score {
   max-width: 150px;
   height:75px;
   min-height:75px;
-  color: #fff;
+  color: #000;
 
 
 
@@ -176,7 +184,7 @@ td.pbp-table-cell-time-score {
   text-align: center;
 
   /* height: 24px; */
-  color: #fff;
+  color: #000;
 }
 
 tr {
@@ -197,10 +205,11 @@ tr {
   /* padding-bottom: 100px; */
   margin-bottom: 10px;
   /* background: #fff; */
-  background: rgba(0, 0, 0, 0.7);
+  /* background: rgba(0, 0, 0, 0.7); */
+  background: #fefefe;
   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4);
   border-radius: 5px;
-  transition: transform, .2s, visibility: 2s;
+  transition: transform .2s, background-color 2s;
 }
 
 .pbp-table-row:hover {
