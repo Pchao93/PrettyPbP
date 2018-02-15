@@ -39,6 +39,7 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
         });
         resetBackground();
         start = false;
+        speed = 8;
       });
       tabs.parentNode.replaceChild(newTabs, tabs);
       runPlayByPlay(game[0], tableContainer);

@@ -31,10 +31,15 @@ async function grabHighlight(gameId, eventId) {
   try {
     await driver.get('https://stats.nba.com/events/?flag=1&GameID=0021700833&GameEventID=4&Season=2017-18&sct=plot');
     await driver.wait(until.elementLocated(By.id('statsPlayer_embed_statsPlayer')), 10000);
+    // console.log();
     video = await driver.findElement(By.id('statsPlayer_embed_statsPlayer')) //.sendKeys('webdriver', Key.RETURN);
-    console.log(video);
+    // console.log(video);
     if (video) {
-      src = video.getAttribute('src').then(result => {
+
+      src = await video.getAttribute('src').then(async (result) => {
+        while (!result || result === 'https://s.cdn.turner.com/xslo/cvp/assets/video/blank.mp4') {
+          result = await video.getAttribute('src').then(result2 => result2);
+        }
         return result;
       });
     }
@@ -42,12 +47,10 @@ async function grabHighlight(gameId, eventId) {
     // await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
   } finally {
     await driver.quit();
-    if (src) {
-      console.log('src', src);
-      console.log("I happen at all!");
-      return src;
-    }
-    console.log('I should always happen!');
+
+    console.log('src', src);
+    return src;
+
   }
 };
 
@@ -106,7 +109,8 @@ app.get('/api/games/:date', (req, res) => {
 
 });
 
-app.listen(PORT, () => {
-  console.log(__dirname);
-  console.log(`listening on ${PORT}`);
-});
+app.listen(process.env.PORT || PORT);
+// , () => {
+//   console.log(__dirname);
+//   console.log(`listening on ${PORT}`);
+// });
