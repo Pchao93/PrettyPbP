@@ -30,7 +30,7 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
       const newTabs = tabs.cloneNode(true);
       newTabs.addEventListener('click', (e) =>{
         console.log('also click');
-        window.timer.pause();
+        window.pause();
         let pausePlayButton = document.querySelector('.pause-play');
         pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>';
         tableContainer.innerHTML = null;
@@ -156,11 +156,11 @@ const createControls = function() {
     if (!window._data.start) {
       window._data.start = true;
       pausePlayButton.innerHTML = '<i class="far fa-pause-circle"></i>'
-    } else if (window.timer && window.timer.getStateRunning()) {
-      window.timer.pause();
+    } else if (window.timer && window.getStateRunning()) {
+      window.pause();
       pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>'
     } else if (window.timer){
-      window.timer.start();
+      window.start();
       pausePlayButton.innerHTML = '<i class="far fa-pause-circle"></i>'
     }
   }
@@ -168,7 +168,7 @@ const createControls = function() {
   speedUpButton.innerHTML = '<i class="fas fa-forward"></i>';
   speedUpButton.addEventListener('click', ()=> {
     if (window._data.speed < 32) {
-      window.timer.speedUp();
+      window.speedUp();
       window._data.speed *= 2;
     }
     // speedDisplay.innerHTML = `<span>Speed:</span> ${window._data.speed}`;
@@ -176,7 +176,7 @@ const createControls = function() {
   slowDownButton.innerHTML = '<i class="fas fa-backward"></i>';
   slowDownButton.addEventListener('click', ()=> {
     if (window._data.speed > 1) {
-      window.timer.slowDown();
+      window.slowDown();
 
 
       window._data.speed /= 2;
@@ -350,46 +350,46 @@ function sleeper(time) {
 function timer(callback, delay) {
     let id, started, remaining = delay, running
 
-    timer.start = function() {
+    start = function() {
 
         running = true
         started = new Date()
         id = setTimeout(callback, remaining)
     }
 
-    timer.pause = function() {
+    pause = function() {
 
         running = false
         clearTimeout(id)
         remaining -= new Date() - started
     }
 
-    timer.getTimeLeft = function() {
+    getTimeLeft = function() {
         if (running) {
-            timer.pause()
-            timer.start()
+            pause()
+            start()
         }
 
         return remaining
     }
 
-    timer.getStateRunning = function() {
+    getStateRunning = function() {
         return running
     }
 
-    timer.speedUp = function() {
-      timer.pause();
+    speedUp = function() {
+      pause();
       remaining /= 2;
-      timer.start()
+      start()
     }
 
-    timer.slowDown = function() {
-      timer.pause();
+    slowDown = function() {
+      pause();
       remaining *= 2;
-      timer.start()
+      start()
     }
 
-    timer.start()
+    start()
     return timer;
 }
 window.timer = timer
