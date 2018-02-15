@@ -2,9 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
   const root = document.getElementById('root');
-  start = false;
-  speed = 8;
-  timer;
+  window._data = {};
+  window._data.start = false;
+  window._data.speed = 8;
+  window._data.timer;
   let games = await fetchGames('0115');
   let controls = createControls();
   let tableContainer = document.createElement('div');
@@ -29,7 +30,7 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
       const newTabs = tabs.cloneNode(true);
       newTabs.addEventListener('click', (e) =>{
         console.log('also click');
-        timer.pause();
+        window.timer.pause();
         let pausePlayButton = document.querySelector('.pause-play');
         pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>';
         tableContainer.innerHTML = null;
@@ -38,8 +39,8 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
           tableContainer.appendChild(headerTabs);
         });
         resetBackground();
-        start = false;
-        speed = 8;
+        window._data.start = false;
+        window._data.speed = 8;
       });
       tabs.parentNode.replaceChild(newTabs, tabs);
       runPlayByPlay(game[0], tableContainer);
@@ -152,33 +153,33 @@ const createControls = function() {
   slowDownButton.classList.add('slow-down');
   pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>';
   pausePlayButton.addEventListener('click', ()=> {
-    if (!start) {
-      start = true;
+    if (!window._data.start) {
+      window._data.start = true;
       pausePlayButton.innerHTML = '<i class="far fa-pause-circle"></i>'
-    } else if (timer && timer.getStateRunning()) {
-      timer.pause();
+    } else if (window.timer && window.timer.getStateRunning()) {
+      window.timer.pause();
       pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>'
-    } else if (timer){
-      timer.start();
+    } else if (window.timer){
+      window.timer.start();
       pausePlayButton.innerHTML = '<i class="far fa-pause-circle"></i>'
     }
   }
 );
   speedUpButton.innerHTML = '<i class="fas fa-forward"></i>';
   speedUpButton.addEventListener('click', ()=> {
-    if (speed < 32) {
-      timer.speedUp();
-      speed *= 2;
+    if (window._data.speed < 32) {
+      window.timer.speedUp();
+      window._data.speed *= 2;
     }
-    // speedDisplay.innerHTML = `<span>Speed:</span> ${speed}`;
+    // speedDisplay.innerHTML = `<span>Speed:</span> ${window._data.speed}`;
   });
   slowDownButton.innerHTML = '<i class="fas fa-backward"></i>';
   slowDownButton.addEventListener('click', ()=> {
-    if (speed > 1) {
-      timer.slowDown();
+    if (window._data.speed > 1) {
+      window.timer.slowDown();
 
 
-      speed /= 2;
+      window._data.speed /= 2;
     }
     // speedDisplay.innerHTML = `<span>Speed:</span> ${speed}`;
   });
@@ -264,19 +265,19 @@ async function updateTable(table, rowsData) {
   let i = 0;
   while (i < rowsData.length) {
     // console.log(timer);
-    if (start) {
+    if (window._data.start) {
       let rowArray = rowsData[i];
       let newTime = calculateTimeOut(rowArray[6], rowArray[4]);
 
 
-      let row = await sleeper((newTime - oldTime)/ speed)().then(() => {
+      let row = await sleeper((newTime - oldTime)/ window._data.speed)().then(() => {
         // console.log("happening!");
 
         return createRow(rowArray);
       });
       table.prepend(row);
         if (i === rowsData.length - 1) {
-          timer(() => table.prepend(createFinalRow()), 250);
+          window.timer(() => table.prepend(createFinalRow()), 250);
         }
       oldTime = newTime;
       i++;
@@ -340,7 +341,7 @@ const calculateTimeOut = function(timeString, period) {
 
 function sleeper(time) {
   return function(x) {
-    return new Promise(resolve => timer(() => resolve(x), time));
+    return new Promise(resolve => window.timer(() => resolve(x), time));
   };
 }
 
@@ -391,3 +392,4 @@ function timer(callback, delay) {
     timer.start()
     return timer;
 }
+window.timer = timer
