@@ -25,7 +25,7 @@ app.get('/dog', async (req, res) => {
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
 async function grabHighlight(gameId, eventId) {
-  let driver = await new Builder().forBrowser(process.env.GOOGLE_CHROME_BIN || 'chrome').build();
+  let driver = await new Builder().forBrowser('chrome').build();
   let video;
   let src;
   try {
