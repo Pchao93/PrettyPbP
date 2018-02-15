@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "webpack --watch",
-    "start": "node app.js",
+    "start": "webpack && node app.js",
     "start:debug": "DEBUG=* node app.js"
   },
   "dependencies": {
