@@ -25,7 +25,20 @@ app.get('/dog', async (req, res) => {
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
 async function grabHighlight(gameId, eventId) {
-  let driver = await new Builder().forBrowser('chrome').build();
+  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+
+  chrome_opts = chrome_bin ? {
+    "chromeOptions": {
+      "binaryLocation": chrome_bin,
+      'binary_location': chrome_bin,
+    },
+    'chrome_options': {
+      'binary_location': chrome_bin,
+      'binaryLocation': chrome_bin,
+    },
+  } : {}
+
+  let driver = await new Builder().forBrowser('chrome').setChromeOptions(chrome_opts).build();
   let video;
   let src;
   try {
@@ -104,7 +117,7 @@ app.get('/api/games/:date', (req, res) => {
     });
 
 });
-console.log(process.env);
+
 app.listen(process.env.PORT || PORT);
 
 // , () => {
