@@ -29,12 +29,12 @@ async function grabHighlight(gameId, eventId) {
 
   chrome_opts = chrome_bin ? {
     "chromeOptions": {
-      "binaryLocation": chrome_bin,
+      "binary": chrome_bin,
       'binary_location': chrome_bin,
     },
     'chrome_options': {
       'binary_location': chrome_bin,
-      'binaryLocation': chrome_bin,
+      'binary': chrome_bin,
     },
   } : {}
 
