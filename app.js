@@ -25,17 +25,14 @@ app.get('/dog', async (req, res) => {
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
 async function grabHighlight(gameId, eventId) {
-  let driver = await new Builder().forBrowser('chrome').build();
+  let driver = await new Builder().forBrowser(process.env.GOOGLE_CHROME_BIN || 'chrome').build();
   let video;
   let src;
   try {
     await driver.get('https://stats.nba.com/events/?flag=1&GameID=0021700833&GameEventID=4&Season=2017-18&sct=plot');
     await driver.wait(until.elementLocated(By.id('statsPlayer_embed_statsPlayer')), 10000);
-    // console.log();
     video = await driver.findElement(By.id('statsPlayer_embed_statsPlayer')) //.sendKeys('webdriver', Key.RETURN);
-    // console.log(video);
     if (video) {
-
       src = await video.getAttribute('src').then(async (result) => {
         while (!result || result === 'https://s.cdn.turner.com/xslo/cvp/assets/video/blank.mp4') {
           result = await video.getAttribute('src').then(result2 => result2);
@@ -44,7 +41,6 @@ async function grabHighlight(gameId, eventId) {
       });
     }
     console.log(src);
-    // await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
   } finally {
     await driver.quit();
 
@@ -108,7 +104,7 @@ app.get('/api/games/:date', (req, res) => {
     });
 
 });
-
+console.log(process.env);
 app.listen(process.env.PORT || PORT);
 
 // , () => {
