@@ -80,7 +80,7 @@ app.get('/api/playbyplay/:gameId', (req, res) => {
           connection: 'keep-alive',
           host: 'stats.nba.com',
           'accept-language':'he-IL,he;q=0.8,en-US;q=0.6,en;q=0.4',
-          'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36'
+          'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
           Accept: '*/*',
 
