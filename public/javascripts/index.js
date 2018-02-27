@@ -1,4 +1,4 @@
-
+import {playbyplays} from "./games"
 
 document.addEventListener('DOMContentLoaded', async () => {
   const root = document.getElementById('root');
@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let controls = createControls();
   let tableContainer = document.createElement('div');
   setUpBackground(root);
+
   tableContainer.classList.add('table-container');
   let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root);
   headerTabsArray.forEach(headerTabs => {
@@ -53,18 +54,20 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
 
 const runPlayByPlay = function(gameId, tableContainer) {
   let rowsData;
-  fetch(`/api/playbyplay/${gameId}`).then((res) =>{
-    return res.json();
-  })
-  .then((res) => {
-    rowsData = res.resultSets[0].rowSet;
+  // fetch(`/api/playbyplay/${gameId}`).then((res) =>{
+  //   return res.json();
+  // })
+  // .then((res) => {
+    // rowsData = res.resultSets[0].rowSet;
+    rowsData = playbyplays[gameId].resultSets[0].rowSet;
+    console.log(playbyplays[gameId].resultSets[0].rowSet);
     let table = createTable();
     tableContainer.appendChild(table);
     updateTable(table, rowsData, gameId).then(table => {
 
       tableContainer.appendChild(table);
     });
-  });
+  // });
 };
 
 const setBackground = function(team1, team2) {
@@ -229,9 +232,9 @@ const createTabs= function(team1, team2) {
 
   };
 
-  headerTabs = document.createElement('div');
+  let headerTabs = document.createElement('div');
   headerTabs.classList.add('header-tabs');
-  headerTab1 = document.createElement('div');
+  let headerTab1 = document.createElement('div');
   headerTab1.innerHTML = team1;
   headerTab1.classList.add('header-tab');
   headerTab1.style.background = TABCOLORS[team1];
@@ -240,7 +243,7 @@ const createTabs= function(team1, team2) {
   } else if (team1 === 'HOU') {
     headerTab1.style.color = '#CE1141'
   }
-  headerTab2 = document.createElement('div');
+  let headerTab2 = document.createElement('div');
   headerTab2.classList.add('header-tab');
   headerTab2.innerHTML = team2;
   headerTab2.style.background= TABCOLORS[team2];
@@ -332,25 +335,25 @@ const createRow = function(rowArray) {
   row.appendChild(homeDescription);
 
   row.addEventListener('click', (e) => {
-    row.removeEventListener(e.type, arguments.callee)
+    // row.removeEventListener(e.type, arguments.callee)
     videoEventHandler(row, rowArray)
   });
   return row;
 };
 
 const videoEventHandler = function(row, rowArray) {
-  loadingDiv = document.createElement('div');
+  let loadingDiv = document.createElement('div');
   loadingDiv.classList.add('loading-div');
   loadingDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'
   row.parentNode.insertBefore(loadingDiv, row.nextSibling);
   let video = document.createElement('video');
   row.addEventListener('click', (e)=> {
-    row.removeEventListener(e.type, arguments.callee)
+    // row.removeEventListener(e.type, arguments.callee)
     e.preventDefault();
     video.parentNode.removeChild(video);
     window.play();
     row.addEventListener('click', (e) => {
-      row.removeEventListener(e.type, arguments.callee);
+      // row.removeEventListener(e.type, arguments.callee);
       videoEventHandler(row, rowArray);
     });
   });
@@ -402,21 +405,21 @@ function sleeper(time) {
 function timer(callback, delay) {
     let id, started, remaining = delay, running
 
-    start = function() {
+    window.start = function() {
 
         running = true
         started = new Date()
         id = setTimeout(callback, remaining)
     }
 
-    pause = function() {
+    window.pause = function() {
 
         running = false
         clearTimeout(id)
         remaining -= new Date() - started
     }
 
-    getTimeLeft = function() {
+    window.getTimeLeft = function() {
         if (running) {
             pause()
             start()
@@ -425,23 +428,23 @@ function timer(callback, delay) {
         return remaining
     }
 
-    getStateRunning = function() {
+    window.getStateRunning = function() {
         return running
     }
 
-    speedUp = function() {
+    window.speedUp = function() {
       pause();
       remaining /= 2;
       start()
     }
 
-    slowDown = function() {
+    window.slowDown = function() {
       pause();
       remaining *= 2;
       start()
     }
 
-    start()
+    window.start()
     return timer;
 }
 window.timer = timer

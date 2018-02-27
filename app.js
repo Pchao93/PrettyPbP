@@ -122,7 +122,7 @@ app.get('/api/games/:date', (req, res) => {
 
 });
 
-app.listen(80);
+app.listen(process.env.PORT || PORT);
 
 // , () => {
 //   console.log(__dirname);
