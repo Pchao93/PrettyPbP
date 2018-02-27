@@ -60,7 +60,7 @@ const runPlayByPlay = function(gameId, tableContainer) {
     rowsData = res.resultSets[0].rowSet;
     let table = createTable();
     tableContainer.appendChild(table);
-    updateTable(table, rowsData).then(table => {
+    updateTable(table, rowsData, gameId).then(table => {
 
       tableContainer.appendChild(table);
     });
@@ -327,12 +327,64 @@ const createRow = function(rowArray) {
   let visitorDescription = document.createElement('td');
   visitorDescription.innerHTML = rowArray[9];
   visitorDescription.classList.add('pbp-table-cell');
-
-  row.appendChild(homeDescription);
-  row.appendChild(gameTimeScore);
   row.appendChild(visitorDescription);
+  row.appendChild(gameTimeScore);
+  row.appendChild(homeDescription);
+
+  row.addEventListener('click', (e) => {
+    row.removeEventListener(e.type, arguments.callee)
+    videoEventHandler(row, rowArray)
+  });
   return row;
 };
+
+const videoEventHandler = function(row, rowArray) {
+  loadingDiv = document.createElement('div');
+  loadingDiv.classList.add('loading-div');
+  loadingDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'
+  row.parentNode.insertBefore(loadingDiv, row.nextSibling);
+  let video = document.createElement('video');
+  row.addEventListener('click', (e)=> {
+    row.removeEventListener(e.type, arguments.callee)
+    e.preventDefault();
+    video.parentNode.removeChild(video);
+    window.play();
+    row.addEventListener('click', (e) => {
+      row.removeEventListener(e.type, arguments.callee);
+      videoEventHandler(row, rowArray);
+    });
+  });
+  window.pause();
+  fetch(`/api/highlights/${rowArray[0]}/${rowArray[1]}`)
+    .then(res => {
+      console.log(res);
+      return res.text()
+    })
+    .then(res => {
+
+      createVideo(video, res, row)
+      row.parentNode.replaceChild(video, loadingDiv);
+      // video.parentNode.insertBefore(closeButton, video.nextSibling);
+    });
+}
+
+const createVideo = function(video, res, row) {
+  video.setAttribute('src', res);
+  video.setAttribute('autoplay', true);
+  video.setAttribute('controls', true);
+  video.setAttribute('width', '750px');
+  video.setAttribute('height', '425px');
+  video.setAttribute('loop', true);
+  video.classList.add('highlight-video');
+  // closeButton = document.createElement('button')
+  // closeButton.innerHTML = 'x';
+  // closeButton.classList.add('close-button');
+
+  // return closeButton;
+  // video.parentNode.insertBefore(closeButton, video.nextSibling);
+
+
+}
 
 const calculateTimeOut = function(timeString, period) {
   const timeArray = timeString.split(':');

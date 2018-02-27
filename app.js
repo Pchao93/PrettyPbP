@@ -14,9 +14,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-app.get('/dog', async (req, res) => {
-  // let highlightURL = await grabHighlight(req.params.gameId, req.params.eventId);
-  let highlightURL = await grabHighlight(0021700833, 4);
+app.get('/api/highlights/:gameId/:eventId', async (req, res) => {
+  let highlightURL = await grabHighlight(req.params.gameId, req.params.eventId);
+  // let highlightURL = await grabHighlight(0021700833, 4);
 
   res.send(highlightURL);
 
@@ -42,7 +42,7 @@ async function grabHighlight(gameId, eventId) {
   let video;
   let src;
   try {
-    await driver.get('https://stats.nba.com/events/?flag=1&GameID=0021700833&GameEventID=4&Season=2017-18&sct=plot');
+    await driver.get(`https://stats.nba.com/events/?flag=1&GameID=${gameId}&GameEventID=${eventId}&Season=2017-18&sct=plot`);
     await driver.wait(until.elementLocated(By.id('statsPlayer_embed_statsPlayer')), 10000);
     video = await driver.findElement(By.id('statsPlayer_embed_statsPlayer')) //.sendKeys('webdriver', Key.RETURN);
     if (video) {
