@@ -28,12 +28,12 @@ async function grabHighlight(gameId, eventId) {
   chrome_bin = process.env.GOOGLE_CHROME_SHIM;
 
   chrome_opts = chrome_bin ? {
-    "chromeOptions": {
-      "binary": chrome_bin,
-      'binary_location': chrome_bin,
-    },
+    // "chromeOptions": {
+    //   "binary": chrome_bin,
+    //   'binary_location': chrome_bin,
+    // },
     'chrome_options': {
-      'binary_location': chrome_bin,
+      // 'binary_location': chrome_bin,
       'binary': chrome_bin,
     },
   } : {}
