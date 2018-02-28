@@ -25,6 +25,8 @@ app.get('/api/highlights/:gameId/:eventId', async (req, res) => {
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
 async function grabHighlight(gameId, eventId) {
+  console.log("BIN", process.env.GOOGLE_CHROME_BIN);
+  console.log("SHIM", process.env.GOOGLE_CHROME_SHIM);
   chrome_bin = process.env.GOOGLE_CHROME_BIN;
 
   chrome_opts = chrome_bin ? {
