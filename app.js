@@ -36,11 +36,11 @@ async function grabHighlight(gameId, eventId) {
     // },
     'chrome_options': {
       // 'binary_location': chrome_bin,
-      'binary': chrome_bin,
+      'binary': './',
     },
   } : {}
 
-  let driver = await new Builder().forBrowser('chrome').build();
+  let driver = await new Builder().forBrowser('chrome').setChromeOptions(chrome_opts).build();
   let video;
   let src;
   try {
