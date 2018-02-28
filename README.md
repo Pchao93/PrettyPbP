@@ -1,4 +1,4 @@
-###PrettyPbP - A new way to present play by play data for the NBA
+PrettyPbP
 ======
 
 PrettyPbP is a better way to go over play by play data for the NBA. [Traditional views](https://stats.nba.com/game/0021700833/playbyplay/), while perfect for statisticians, strip away a sense of pace and flow for the typical fan. PrettyPbP aims to provide a visually appealing play-by-play record for fans that mimics the actual timeline of the game.
