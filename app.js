@@ -40,7 +40,7 @@ async function grabHighlight(gameId, eventId) {
     },
   } : {}
 
-  let driver = await new Builder().forBrowser('chrome').setChromeOptions(chrome_opts).build();
+  let driver = await new Builder().forBrowser('chrome').build();
   let video;
   let src;
   try {
