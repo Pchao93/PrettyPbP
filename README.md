@@ -1,14 +1,6 @@
-# Simple Node Backend for avoiding CORS issues in development
+###PrettyPbP - A new way to present play by play data for the NBA
+======
 
-* `npm install`
-* `webpack`
-* `npm start`
+PrettyPbP is a better way to go over play by play data for the NBA. [Traditional views](https://stats.nba.com/game/0021700833/playbyplay/), while perfect for statisticians, strip away a sense of pace and flow for the typical fan. PrettyPbP aims to provide a visually appealing play-by-play record for fans that mimics the actual timeline of the game.
 
-
-# Implementation
-
-This project allows you to serve your HTML and JS from a custom backend that performs API requests to an external API.
-
-`app.js` contains the routes that you need to get your data. Customize them according to the paths you wish to use in your code, and the API you wish to access
-
-Write your JS in the `javascripts` folder; your entry file is `index.js`.
+NOTE: As of late 2017, the NBA has chosen to restrict access to their API from the majority of server providers. Until this decision has changed, PrettyPbP can be run locally from your own machine by cloning the repo and running "npm install" and "npm start"
