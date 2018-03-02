@@ -59,12 +59,12 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
 
 const runPlayByPlay = function(gameId, tableContainer) {
   let rowsData;
-  fetch(`/api/playbyplay/${gameId}`).then((res) =>{
-    return res.json();
-  })
-  .then((res) => {
-    rowsData = res.resultSets[0].rowSet;
-    // rowsData = playbyplays[gameId].resultSets[0].rowSet;
+  // fetch(`/api/playbyplay/${gameId}`).then((res) =>{
+    // return res.json();
+  // })
+  // .then((res) => {
+    // rowsData = res.resultSets[0].rowSet;
+    rowsData = playbyplays[gameId].resultSets[0].rowSet;
     // console.log(playbyplays[gameId].resultSets[0].rowSet);
     let table = createTable();
     tableContainer.appendChild(table);
@@ -72,7 +72,7 @@ const runPlayByPlay = function(gameId, tableContainer) {
 
       tableContainer.appendChild(table);
     });
-  });
+  // });
 };
 
 const setBackground = function(team1, team2) {
