@@ -45,7 +45,7 @@ async function grabHighlight(gameId, eventId) {
   console.log("I get this far right?");
   let driver = await new Builder().withCapabilities({
     'browserName': 'chrome',
-    'binary': '/app/.apt/opt/google/chrome/google-chrome',
+    'binary': process.env.GOOGLE_CHROME_SHIM,
   }).build(); //;forBrowser('chrome').build();
   console.log("driver", driver);
   console.log("capabilities", driver.getCapabilities());
