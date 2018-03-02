@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/highlights/:gameId/:eventId', async (req, res) => {
+  console.log(req);
   let highlightURL = await grabHighlight(req.params.gameId, req.params.eventId);
   // let highlightURL = await grabHighlight(0021700833, 4);
 
@@ -46,7 +47,9 @@ async function grabHighlight(gameId, eventId) {
     'browserName': 'chrome',
     'binary': process.env.GOOGLE_CHROME_SHIM,
   }).build(); //;forBrowser('chrome').build();
-  console.log(driver);
+  console.log("driver", driver);
+  console.log("capabilities", driver.getCapabilities());
+  // console.log("options", driver.getCapabilities().getChromeOptions());
   let video;
   let src;
   try {
