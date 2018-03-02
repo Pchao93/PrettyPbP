@@ -15,6 +15,7 @@
     "start:debug": "DEBUG=* node app.js"
   },
   "dependencies": {
+    "chromedriver": "^2.33.2",
     "eslint": "^4.17.0",
     "express": "^4.15.3",
     "node-fetch": "^1.7.3",
