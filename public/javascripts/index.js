@@ -38,7 +38,7 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
         console.log('also click');
         window.pause();
         let pausePlayButton = document.querySelector('.pause-play');
-        pausePlayButton.innerHTML = '<i class="far fa-play"></i>';
+        pausePlayButton.innerHTML = '<i class="fas fa-play"></i>';
         tableContainer.innerHTML = null;
         let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root)
         headerTabsArray.forEach(headerTabs => {
@@ -159,17 +159,17 @@ const createControls = function() {
   speedUpButton.classList.add('speed-up');
   let slowDownButton = document.createElement('div');
   slowDownButton.classList.add('slow-down');
-  pausePlayButton.innerHTML = '<i class="far fa-play"></i>';
+  pausePlayButton.innerHTML = '<i class="fas fa-play"></i>';
   pausePlayButton.addEventListener('click', ()=> {
     if (!window._data.start) {
       window._data.start = true;
-      pausePlayButton.innerHTML = '<i class="far fa-pause"></i>'
+      pausePlayButton.innerHTML = '<i class="fas fa-pause"></i>'
     } else if (window.timer && window.getStateRunning()) {
       window.pause();
-      pausePlayButton.innerHTML = '<i class="far fa-play"></i>'
+      pausePlayButton.innerHTML = '<i class="fas fa-play"></i>'
     } else if (window.timer){
       window.start();
-      pausePlayButton.innerHTML = '<i class="far fa-pause"></i>'
+      pausePlayButton.innerHTML = '<i class="fas fa-pause"></i>'
     }
   }
 );
