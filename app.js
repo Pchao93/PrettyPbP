@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/highlights/:gameId/:eventId', async (req, res) => {
-  console.log(req);
+  // console.log(req);
   let highlightURL = await grabHighlight(req.params.gameId, req.params.eventId);
   // let highlightURL = await grabHighlight(0021700833, 4);
 
@@ -45,9 +45,9 @@ async function grabHighlight(gameId, eventId) {
   console.log(Capabilities.chrome());
   let builder = new Builder().withCapabilities({
     'browserName': 'chrome',
-    'binary': '/app/.apt/usr/bin/google-chrome',
-    'binary_location': '/app/.apt/usr/bin/google-chrome',
-    'binaryLocation': '/app/.apt/usr/bin/google-chrome',
+    'binary': process.env.GOOGLE_CHROME_SHIM,
+    'binary_location': process.env.GOOGLE_CHROME_SHIM,
+    'binaryLocation': process.env.GOOGLE_CHROME_SHIM,
 
 
   }); //;forBrowser('chrome').build();
