@@ -43,14 +43,19 @@ async function grabHighlight(gameId, eventId) {
 // .setChromeOptions(chrome_opts)
   console.log("I get this far right?");
   console.log(Capabilities.chrome());
-  let driver = await new Builder().withCapabilities({
+  let builder = new Builder().withCapabilities({
     'browserName': 'chrome',
     'binary': '/app/.apt/usr/bin/google-chrome',
     'binary_location': '/app/.apt/usr/bin/google-chrome',
     'binaryLocation': '/app/.apt/usr/bin/google-chrome',
 
 
-  }).build(); //;forBrowser('chrome').build();
+  }); //;forBrowser('chrome').build();
+  console.log(builder);
+  console.log(builder.getCapabilities());
+  console.log(builder.getChromeOptions());
+
+  let driver = await builder.build();
   console.log("driver", driver);
   console.log("capabilities", driver.getCapabilities());
   // console.log("options", driver.getCapabilities().getChromeOptions());
