@@ -39,8 +39,8 @@ async function grabHighlight(gameId, eventId) {
   //     'binary': './',
   //   },
   // } : {}
-
-  let driver = await new Builder().forBrowser('chrome').setChromeOptions(chrome_opts).build();
+// .setChromeOptions(chrome_opts)
+  let driver = await new Builder().forBrowser('chrome').build();
   console.log(driver);
   let video;
   let src;
