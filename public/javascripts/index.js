@@ -3,11 +3,12 @@ import {playbyplays} from "./games"
 document.addEventListener('DOMContentLoaded', async () => {
   '<i class="fas fa-basketball-ball"></i>'
   '<i class="fas fa-arrow-left"></i>'
+
   const root = document.getElementById('root');
   window._data = {};
   window._data.start = false;
   window._data.speed = 8;
-  window._data.timer;
+  timer();
   let games = await fetchGames('0115');
   let controls = createControls();
   let tableContainer = document.createElement('div');
@@ -410,21 +411,21 @@ function sleeper(time) {
 function timer(callback, delay) {
     let id, started, remaining = delay, running
 
-    window.start = function() {
+    start = function() {
 
         running = true
         started = new Date()
         id = setTimeout(callback, remaining)
     }
 
-    window.pause = function() {
+    pause = function() {
 
         running = false
         clearTimeout(id)
         remaining -= new Date() - started
     }
 
-    window.getTimeLeft = function() {
+    getTimeLeft = function() {
         if (running) {
             pause()
             start()
@@ -433,17 +434,17 @@ function timer(callback, delay) {
         return remaining
     }
 
-    window.getStateRunning = function() {
+    getStateRunning = function() {
         return running
     }
 
-    window.speedUp = function() {
+    speedUp = function() {
       pause();
       remaining /= 2;
       start()
     }
 
-    window.slowDown = function() {
+    slowDown = function() {
       pause();
       remaining *= 2;
       start()
