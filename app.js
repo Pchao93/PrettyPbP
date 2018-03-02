@@ -25,28 +25,31 @@ app.get('/api/highlights/:gameId/:eventId', async (req, res) => {
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
 async function grabHighlight(gameId, eventId) {
-  console.log("BIN", process.env.GOOGLE_CHROME_BIN);
-  console.log("SHIM", process.env.GOOGLE_CHROME_SHIM);
-  chrome_bin = process.env.GOOGLE_CHROME_SHIM;
-
-  chrome_opts = chrome_bin ? {
-    // "chromeOptions": {
-    //   "binary": chrome_bin,
-    //   'binary_location': chrome_bin,
-    // },
-    'chrome_options': {
-      // 'binary_location': chrome_bin,
-      'binary': './',
-    },
-  } : {}
+  // console.log("BIN", process.env.GOOGLE_CHROME_BIN);
+  // console.log("SHIM", process.env.GOOGLE_CHROME_SHIM);
+  // chrome_bin = process.env.GOOGLE_CHROME_SHIM;
+  //
+  // chrome_opts = chrome_bin ? {
+  //   // "chromeOptions": {
+  //   //   "binary": chrome_bin,
+  //   //   'binary_location': chrome_bin,
+  //   // },
+  //   'chrome_options': {
+  //     // 'binary_location': chrome_bin,
+  //     'binary': './',
+  //   },
+  // } : {}
 
   let driver = await new Builder().forBrowser('chrome').setChromeOptions(chrome_opts).build();
+  console.log(driver);
   let video;
   let src;
   try {
+    console.log("try");
     await driver.get(`https://stats.nba.com/events/?flag=1&GameID=${gameId}&GameEventID=${eventId}&Season=2017-18&sct=plot`);
     await driver.wait(until.elementLocated(By.id('statsPlayer_embed_statsPlayer')), 10000);
     video = await driver.findElement(By.id('statsPlayer_embed_statsPlayer')) //.sendKeys('webdriver', Key.RETURN);
+    console.log("something bit");
     if (video) {
       src = await video.getAttribute('src').then(async (result) => {
         while (!result || result === 'https://s.cdn.turner.com/xslo/cvp/assets/video/blank.mp4') {
