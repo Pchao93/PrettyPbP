@@ -23,7 +23,7 @@ app.get('/api/highlights/:gameId/:eventId', async (req, res) => {
 
 });
 
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Capabilities, Builder, By, Key, until} = require('selenium-webdriver');
 
 async function grabHighlight(gameId, eventId) {
   console.log("BIN", process.env.GOOGLE_CHROME_BIN);
@@ -42,9 +42,14 @@ async function grabHighlight(gameId, eventId) {
   // } : {}
 // .setChromeOptions(chrome_opts)
   console.log("I get this far right?");
+  console.log(Capabilities.chrome());
   let driver = await new Builder().withCapabilities({
     'browserName': 'chrome',
     'binary': '/app/.apt/usr/bin/google-chrome',
+    'binary_location': '/app/.apt/usr/bin/google-chrome',
+    'binaryLocation': '/app/.apt/usr/bin/google-chrome',
+
+
   }).build(); //;forBrowser('chrome').build();
   console.log("driver", driver);
   console.log("capabilities", driver.getCapabilities());
