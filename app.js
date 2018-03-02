@@ -40,8 +40,12 @@ async function grabHighlight(gameId, eventId) {
   //   },
   // } : {}
 // .setChromeOptions(chrome_opts)
+
   console.log("I get this far right?");
-  let driver = await new Builder().forBrowser('chrome').build();
+  let driver = await new Builder().withCapabilities({
+    'browserName': 'chrome',
+    'binary': process.env.GOOGLE_CHROME_SHIM,
+  }).build(); //;forBrowser('chrome').build();
   console.log(driver);
   let video;
   let src;
