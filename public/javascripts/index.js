@@ -1,6 +1,8 @@
 import {playbyplays} from "./games"
 
 document.addEventListener('DOMContentLoaded', async () => {
+  '<i class="fas fa-basketball-ball"></i>'
+  '<i class="fas fa-arrow-left"></i>'
   const root = document.getElementById('root');
   window._data = {};
   window._data.start = false;
@@ -10,8 +12,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   let controls = createControls();
   let tableContainer = document.createElement('div');
   setUpBackground(root);
-
+  let tableHeader = document.createElement('h1')
+  tableHeader.innerHTML = "Select a game from January 1st, 2018"
+  tableHeader.classList.add('table-header');
   tableContainer.classList.add('table-container');
+  tableContainer.appendChild(tableHeader);
   let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root);
   headerTabsArray.forEach(headerTabs => {
     tableContainer.appendChild(headerTabs);
@@ -33,7 +38,7 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
         console.log('also click');
         window.pause();
         let pausePlayButton = document.querySelector('.pause-play');
-        pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>';
+        pausePlayButton.innerHTML = '<i class="far fa-play"></i>';
         tableContainer.innerHTML = null;
         let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root)
         headerTabsArray.forEach(headerTabs => {
@@ -54,20 +59,20 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
 
 const runPlayByPlay = function(gameId, tableContainer) {
   let rowsData;
-  // fetch(`/api/playbyplay/${gameId}`).then((res) =>{
-  //   return res.json();
-  // })
-  // .then((res) => {
-    // rowsData = res.resultSets[0].rowSet;
-    rowsData = playbyplays[gameId].resultSets[0].rowSet;
-    console.log(playbyplays[gameId].resultSets[0].rowSet);
+  fetch(`/api/playbyplay/${gameId}`).then((res) =>{
+    return res.json();
+  })
+  .then((res) => {
+    rowsData = res.resultSets[0].rowSet;
+    // rowsData = playbyplays[gameId].resultSets[0].rowSet;
+    // console.log(playbyplays[gameId].resultSets[0].rowSet);
     let table = createTable();
     tableContainer.appendChild(table);
     updateTable(table, rowsData, gameId).then(table => {
 
       tableContainer.appendChild(table);
     });
-  // });
+  });
 };
 
 const setBackground = function(team1, team2) {
@@ -154,17 +159,17 @@ const createControls = function() {
   speedUpButton.classList.add('speed-up');
   let slowDownButton = document.createElement('div');
   slowDownButton.classList.add('slow-down');
-  pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>';
+  pausePlayButton.innerHTML = '<i class="far fa-play"></i>';
   pausePlayButton.addEventListener('click', ()=> {
     if (!window._data.start) {
       window._data.start = true;
-      pausePlayButton.innerHTML = '<i class="far fa-pause-circle"></i>'
+      pausePlayButton.innerHTML = '<i class="far fa-pause"></i>'
     } else if (window.timer && window.getStateRunning()) {
       window.pause();
-      pausePlayButton.innerHTML = '<i class="far fa-play-circle"></i>'
+      pausePlayButton.innerHTML = '<i class="far fa-play"></i>'
     } else if (window.timer){
       window.start();
-      pausePlayButton.innerHTML = '<i class="far fa-pause-circle"></i>'
+      pausePlayButton.innerHTML = '<i class="far fa-pause"></i>'
     }
   }
 );
