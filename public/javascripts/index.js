@@ -341,7 +341,7 @@ const createRow = function(rowArray) {
 
   row.addEventListener('click', (e) => {
     // row.removeEventListener(e.type, arguments.callee)
-    videoEventHandler(row, rowArray)
+    // videoEventHandler(row, rowArray)
   });
   return row;
 };
@@ -438,7 +438,7 @@ function timer(callback, delay) {
     }
 
     window.speedUp = function() {
-      pause();
+      // pause();
       remaining /= 2;
       start()
     }

@@ -45,9 +45,7 @@ async function grabHighlight(gameId, eventId) {
   console.log(Capabilities.chrome());
   let builder = new Builder().withCapabilities({
     'browserName': 'chrome',
-    'binary': process.env.GOOGLE_CHROME_SHIM,
-    'binary_location': process.env.GOOGLE_CHROME_SHIM,
-    'binaryLocation': process.env.GOOGLE_CHROME_SHIM,
+    'binary': '/.apt/usr/bin/google-chrome-stable',
 
 
   }); //;forBrowser('chrome').build();
