@@ -35,8 +35,8 @@ body {
   width: 150px;
   margin: 0 auto;
 }
-.social-media-link {
-  /* margin-left: 20px; */
+.social-media-link a:hover {
+  color: #36454f;
 }
 
 .about-box .header {
