@@ -87,14 +87,14 @@ body {
   z-index: -1;
 }
 .table-container {
-  width: 800px;
+  width: 40vw;
   margin: 0 auto;
 
 }
 
 .header-tabs {
   margin: 20px auto;
-  width: 750px;
+  width: 40vw;
   display: flex;
   justify-content: space-around;
   transition: transform .2s;
@@ -121,10 +121,10 @@ body {
 .controls-container {
   display: flex;
   justify-content: space-around;
-  padding: 0 10px;
+  /* padding: 0 10px; */
   font-size: 56px;
   margin: 20px auto;
-  width: 800px;
+  width: 40vw;
 }
 
 .controls-container div:hover {
@@ -165,16 +165,16 @@ div svg.fa-play-circle {
 .pbp-table {
   /* background: rgba(0, 0, 0, 0.4); */
   height: 100%;
-  width: 750px;
-  overflow-y: scroll;
+  width: 40vw;
+
   /* padding-right: 10px; */
-  overflow: visible;
+
   /* height: 1500px; */
   display: block;
-  /* overflow-x: hidden; */
-  overflow-y: scroll;
+
+
   font-size: 24px;
-  padding: 0 30px;
+  /* padding: 0 30px; */
   margin: 10px auto;
   /* background: #fff; */
   border-collapse: collapse;
@@ -189,7 +189,8 @@ td.pbp-table-cell {
   padding: 5px 5px;
   max-height:75px;
   height:75px;
-  width: 290px;
+  width: 40%;
+  /* width: 290px; */
   /* min-width: 300px; */
   box-sizing: border-box;
 
@@ -203,12 +204,12 @@ td.pbp-table-cell:hover {
 td.pbp-table-cell-time-score {
   display: flex;
   flex-direction: column;
-  width: 150px;
-  max-width: 150px;
+  /* width: 20%; */
+  /* max-width: 150px; */
   height:75px;
   min-height:75px;
   color: #000;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 
 
 }
@@ -263,9 +264,10 @@ tr {
 }
 
 .loading-div {
-  height: 420px;
-  width: 750px;
-  font-size: 200px;
+  /* height: 420px; */
+  background: black;
+  width: 40vw;
+  font-size: 20vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -274,8 +276,9 @@ tr {
 }
 
 .highlight-video {
+  width: 40vw;
   position: relative;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4);
+  /* box-shadow: 0 2px 4px -1px rgba(0,0,0,0.4), 0 2px 2px -2px rgba(0,0,0,0.4), 0 1px 4px 0 rgba(0,0,0,0.4); */
   /* border-radius: 5px; */
 }
 

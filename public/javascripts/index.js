@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let games = await fetchGames('0115');
   let controls = createControls();
   let tableContainer = document.createElement('div');
+  tableContainer.classList.add("table-container")
   setUpBackground(root);
   // let tableHeader = document.createElement('h1')
   // tableHeader.innerHTML = "Select a game from January 15th, 2018"
@@ -346,29 +347,37 @@ const createRow = function(rowArray) {
   return row;
 };
 
-const videoEventHandler = function(row, rowArray) {
+const videoEventHandler = async function(row, rowArray) {
   let loadingDiv = document.createElement('div');
   loadingDiv.classList.add('loading-div');
   loadingDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'
   row.parentNode.insertBefore(loadingDiv, row.nextSibling);
   let video = document.createElement('video');
+
+
   row.addEventListener('click', (e)=> {
     // row.removeEventListener(e.type, arguments.callee)
     e.preventDefault();
     video.parentNode.removeChild(video);
     window.play();
+    pausePlayButton.innerHTML = '<i class="fas fa-pause"></i>'
+
     row.addEventListener('click', (e) => {
       // row.removeEventListener(e.type, arguments.callee);
-      videoEventHandler(row, rowArray);
+      // videoEventHandler(row, rowArray);
     });
   });
   window.pause();
+  let pausePlayButton = document.querySelector('.pause-play')
+  pausePlayButton.innerHTML = '<i class="fas fa-play"></i>'
+  row.parentNode.replaceChild(video, loadingDiv);
   fetch(`/api/highlights/${rowArray[0]}/${rowArray[1]}`)
     .then(res => {
       console.log(res);
       return res.text()
     })
     .then(res => {
+
 
       createVideo(video, res, row)
       row.parentNode.replaceChild(video, loadingDiv);
@@ -380,8 +389,7 @@ const createVideo = function(video, res, row) {
   video.setAttribute('src', res);
   video.setAttribute('autoplay', true);
   video.setAttribute('controls', true);
-  video.setAttribute('width', '750px');
-  video.setAttribute('height', '425px');
+
   video.setAttribute('loop', true);
   video.classList.add('highlight-video');
   // closeButton = document.createElement('button')
