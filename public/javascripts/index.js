@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   let controls = createControls();
   let tableContainer = document.createElement('div');
   setUpBackground(root);
-  let tableHeader = document.createElement('h1')
-  tableHeader.innerHTML = "Select a game from January 1st, 2018"
-  tableHeader.classList.add('table-header');
-  tableContainer.classList.add('table-container');
-  tableContainer.appendChild(tableHeader);
+  // let tableHeader = document.createElement('h1')
+  // tableHeader.innerHTML = "Select a game from January 15th, 2018"
+  // tableHeader.classList.add('table-header');
+  // tableContainer.classList.add('table-container');
+  // tableContainer.appendChild(tableHeader);
   let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root);
   headerTabsArray.forEach(headerTabs => {
     tableContainer.appendChild(headerTabs);
@@ -28,14 +28,14 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
   let headerTabs = games.map((game) => {
     let tabs = createTabs(game[1], game[2]);
     tabs.addEventListener('click', ()=>{
-      console.log('click!');
+      // console.log('click!');
       tableContainer.innerHTML = null;
       tableContainer.appendChild(tabs);
       tableContainer.appendChild(controls);
       setBackground(game[1], game[2]);
       const newTabs = tabs.cloneNode(true);
       newTabs.addEventListener('click', (e) =>{
-        console.log('also click');
+        // console.log('also click');
         window.pause();
         let pausePlayButton = document.querySelector('.pause-play');
         pausePlayButton.innerHTML = '<i class="fas fa-play"></i>';
@@ -76,13 +76,13 @@ const runPlayByPlay = function(gameId, tableContainer) {
 };
 
 const setBackground = function(team1, team2) {
-  console.log('setup');
+  // console.log('setup');
   const BACKGROUNDCOLORS = {
     'ATL': '#25282A',
     'BOS': '#BA9653', // '#C0C0C0'
-    'BKN': '#000000',
+    'BKN': '#25282A',
     'CHA': '#00788C',
-    'CHI': '#000000',
+    'CHI': '#25282A',
     'DAL': '#C4CED4',
     'DEN': '#5091CD',
     'DET': '#0C4C93',
@@ -91,7 +91,7 @@ const setBackground = function(team1, team2) {
     'LAC': '#ED174C',
     'LAL': '#FDB927',
     'MEM': '#6189B9',
-    'MIA': '#000000',
+    'MIA': '#25282A',
     'MIL': '#EEE1C6',
     'MIN': '#7AC143',
     'NOP': '#C8102E',
@@ -102,8 +102,8 @@ const setBackground = function(team1, team2) {
     'PHX': '#1D1160',
     'POR': '#C4CED4',
     'SAC': '#63727A',
-    'SAS': '#000000',
-    'TOR': '#000000',
+    'SAS': '#25282A',
+    'TOR': '#25282A',
     'UTA': '#00471B',
     'WAS': '#E31837',
     'GSW': '#FFCD34',
@@ -131,7 +131,7 @@ const setUpBackground = function(root) {
 
 
 const resetBackground = function() {
-  console.log('log');
+  // console.log('log');
   let leftBackground = document.querySelector('.left-background');
   leftBackground.style.background = null;
   let rightBackground = document.querySelector('.right-background');
