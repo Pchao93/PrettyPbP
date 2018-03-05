@@ -1,6 +1,7 @@
-![PrettyPbP logo](https://s3-us-west-1.amazonaws.com/experience.images/PrettyPbP-logo-black.png)
-
 [PrettyPbP Live Demo](https://pretty-pbp.herokuapp.com/)
+======
+
+![PrettyPbP logo](https://s3-us-west-1.amazonaws.com/experience.images/PrettyPbP-logo-black.png)
 
 PrettyPbP is a new way to take in play by play data for the NBA. [Traditional views](https://stats.nba.com/game/0021700833/playbyplay/), while perfect for statisticians, strip away a sense of pace and flow for the typical fan. PrettyPbP aims to provide a visually appealing play-by-play record for fans that mimics the actual timeline of the game. All data is obtained from the NBA's website. This project is not affiliated with the NBA
 
