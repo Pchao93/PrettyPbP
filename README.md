@@ -12,7 +12,7 @@ PrettyPbP is a new way to take in play by play data for the NBA. [Traditional vi
 NOTE: As of late 2017, the NBA has chosen to restrict access to their API from the majority of cloud server providers. Until this decision has changed, some PrettyPbP features will only be available on your local machine, and the live link should be considered a demo.
 
 ## Contents
-[Live Features](#features---live-demo) | [Technologies Used](#technologies-used) | [Highlighted Features](#highlighted-features) | [Project Plan](#project-plan)
+[Live Features](#features---live-demo) | [Local Features](#features---local-only) | [Technologies Used](#technologies-used) | [Highlighted Features](#highlighted-features) | [Project Plan](#project-plan)
 
 ## Features - Live Demo
   * Matchups
