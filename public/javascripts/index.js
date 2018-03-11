@@ -8,40 +8,132 @@ document.addEventListener('DOMContentLoaded', async () => {
   window._data.start = false;
   window._data.speed = 8;
   window._data.timer;
-  let games = await fetchGames('0115');
   let controls = createControls();
   let tableContainer = document.createElement('div');
   tableContainer.classList.add("table-container")
   setUpBackground(root);
-  // let tableHeader = document.createElement('h1')
-  // tableHeader.innerHTML = "Select a game from January 15th, 2018"
-  // tableHeader.classList.add('table-header');
-  // tableContainer.classList.add('table-container');
-  // tableContainer.appendChild(tableHeader);
-  let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root);
-  headerTabsArray.forEach(headerTabs => {
-    tableContainer.appendChild(headerTabs);
+
+  let dates = calculateWeek()[0];
+  let dateStrings = calculateWeek()[1];
+
+  let gameDayButtons = setupGameDayButtons(dates, dateStrings, tableContainer, controls, root)
+
+  gameDayButtons.forEach(gameDayButton => {
+    tableContainer.appendChild(gameDayButton);
   });
+
   root.appendChild(tableContainer);
 });
 
-const createHeaderTabs = function(games, tableContainer, controls, root) {
+const setupGameDayButtons = function(dates, dateStrings, tableContainer, controls, root) {
+  tableContainer.innerHTML = null;
+  let tableHeader = document.createElement('h1');
+  tableHeader.innerHTML = "Last Week's Games";
+  tableHeader.classList.add('table-header');
+  tableContainer.appendChild(tableHeader);
+
+  let buttons = dates.map((date, index) => {
+    let button = document.createElement('div');
+    button.classList.add("game-button")
+    button.innerHTML = dateStrings[index];
+    button.addEventListener('click', async () => {
+
+      tableContainer.innerHTML = null;
+      let tableHeader = document.createElement('h1');
+      tableHeader.innerHTML = dateStrings[index];
+      tableHeader.classList.add('table-header');
+      let backArrow = document.createElement('div');
+      backArrow.classList.add('back-arrow');
+      backArrow.innerHTML = '<i class="fas fa-arrow-left"></i>'
+      // backArrow.innerHTML = '< Home'
+      backArrow.addEventListener('click', () =>{
+        let gameDayButtons = setupGameDayButtons(dates, dateStrings, tableContainer, controls, root)
+        gameDayButtons.forEach(gameDayButton => {
+          tableContainer.appendChild(gameDayButton);
+        });
+        root.appendChild(tableContainer);
+      });
+      tableContainer.appendChild(tableHeader);
+      tableContainer.appendChild(backArrow);
+
+      let games = await fetchGames(date);
+      let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root, dates, dateStrings, index);
+      headerTabsArray.forEach(headerTabs => {
+        tableContainer.appendChild(headerTabs);
+      });
+
+    })
+    return button;
+  });
+
+  return buttons;
+}
+
+//Returns a weeks worth of date strings in the format YYYYMMDD
+const calculateWeek = function() {
+  const dates = [];
+  const dateStrings = [];
+  let date = new Date();
+
+  let i = 0
+  while (i < 7) {
+    date.setDate(date.getDate() - 1);
+    dateStrings.push(date.toDateString())
+    let dateString = date.toLocaleDateString().split('/');
+
+    // dateString[2] = dateString[2].slice(0, 2);
+    if (dateString[0].length < 2) {
+      dateString[0] = "0" + dateString[0];
+    }
+    if (dateString[1].length < 2) {
+      dateString[1] = "0" + dateString[1];
+    }
+    dateString = [dateString[2], dateString[0], dateString[1]].join('');
+    dates.push(dateString);
+    i++
+  }
+
+  return [dates, dateStrings];
+
+}
+
+const createHeaderTabs = function(games, tableContainer, controls, root, dates, dateStrings, index) {
   let headerTabs = games.map((game) => {
     let tabs = createTabs(game[1], game[2]);
     tabs.addEventListener('click', ()=>{
       // console.log('click!');
       tableContainer.innerHTML = null;
+      let backArrow = document.createElement('div');
+      backArrow.classList.add('back-arrow', 'white');
+      backArrow.innerHTML = '<i class="fas fa-arrow-left"></i>'
       tableContainer.appendChild(tabs);
       tableContainer.appendChild(controls);
       setBackground(game[1], game[2]);
       const newTabs = tabs.cloneNode(true);
-      newTabs.addEventListener('click', (e) =>{
+      backArrow.addEventListener('click', (e) =>{
         // console.log('also click');
         window.pause();
         let pausePlayButton = document.querySelector('.pause-play');
         pausePlayButton.innerHTML = '<i class="fas fa-play"></i>';
         tableContainer.innerHTML = null;
-        let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root)
+        let tableHeader = document.createElement('h1');
+        tableHeader.innerHTML = dateStrings[index];
+        tableHeader.classList.add('table-header');
+        let backArrow = document.createElement('div');
+        backArrow.classList.add('back-arrow');
+        backArrow.innerHTML = '<i class="fas fa-arrow-left"></i>'
+        // backArrow.innerHTML = '< Home'
+        backArrow.addEventListener('click', () =>{
+          let gameDayButtons = setupGameDayButtons(dates, dateStrings, tableContainer, controls, root)
+          gameDayButtons.forEach(gameDayButton => {
+            tableContainer.appendChild(gameDayButton);
+          });
+        });
+        tableContainer.appendChild(tableHeader);
+        tableContainer.appendChild(backArrow);
+
+
+        let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root, dates, dateStrings, index)
         headerTabsArray.forEach(headerTabs => {
           tableContainer.appendChild(headerTabs);
         });
@@ -49,6 +141,8 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
         window._data.start = false;
         window._data.speed = 8;
       });
+      tableContainer.appendChild(backArrow);
+      newTabs.classList.add('show')
       tabs.parentNode.replaceChild(newTabs, tabs);
       runPlayByPlay(game[0], tableContainer);
 
@@ -60,12 +154,12 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
 
 const runPlayByPlay = function(gameId, tableContainer) {
   let rowsData;
-  // fetch(`/api/playbyplay/${gameId}`).then((res) =>{
-    // return res.json();
-  // })
-  // .then((res) => {
-    // rowsData = res.resultSets[0].rowSet;
-    rowsData = playbyplays[gameId].resultSets[0].rowSet;
+  fetch(`/api/playbyplay/${gameId}`).then((res) =>{
+    return res.json();
+  })
+  .then((res) => {
+    rowsData = res.resultSets[0].rowSet;
+    // rowsData = playbyplays[gameId].resultSets[0].rowSet;
     // console.log(playbyplays[gameId].resultSets[0].rowSet);
     let table = createTable();
     tableContainer.appendChild(table);
@@ -73,7 +167,7 @@ const runPlayByPlay = function(gameId, tableContainer) {
 
       tableContainer.appendChild(table);
     });
-  // });
+  });
 };
 
 const setBackground = function(team1, team2) {
@@ -342,7 +436,7 @@ const createRow = function(rowArray) {
 
   row.addEventListener('click', (e) => {
     // row.removeEventListener(e.type, arguments.callee)
-    // videoEventHandler(row, rowArray)
+    videoEventHandler(row, rowArray)
   });
   return row;
 };
@@ -364,13 +458,13 @@ const videoEventHandler = async function(row, rowArray) {
 
     row.addEventListener('click', (e) => {
       // row.removeEventListener(e.type, arguments.callee);
-      // videoEventHandler(row, rowArray);
+      videoEventHandler(row, rowArray);
     });
   });
   window.pause();
   let pausePlayButton = document.querySelector('.pause-play')
   pausePlayButton.innerHTML = '<i class="fas fa-play"></i>'
-  row.parentNode.replaceChild(video, loadingDiv);
+  // row.parentNode.replaceChild(video, loadingDiv);
   fetch(`/api/highlights/${rowArray[0]}/${rowArray[1]}`)
     .then(res => {
       console.log(res);

@@ -86,7 +86,7 @@ app.get('/api/games/:date', (req, res) => {
   let results;
 
 
-  fetch(`http://data.nba.net/10s/prod/v1/2018${req.params.date}/scoreboard.json`)
+  fetch(`http://data.nba.net/10s/prod/v1/${req.params.date}/scoreboard.json`)
     .then(function(response) {
 
         return response.text();
