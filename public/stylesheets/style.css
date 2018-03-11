@@ -89,6 +89,41 @@ body {
 .table-container {
   width: 40vw;
   margin: 0 auto;
+  position: relative;
+
+}
+
+.back-arrow {
+  font-size: 48px;
+  position: absolute;
+  top: 10px;
+  left: -70px;
+  transition: transform .2s;
+
+}
+
+.back-arrow.white {
+  color: #fff;
+  /* top: 10px; */
+}
+
+.back-arrow:hover {
+  cursor: pointer;
+  transform: scale(1.1)
+}
+
+.table-header {
+  font-size: 48px;
+  margin: 20px auto;
+  width: 50%;
+  text-align: center;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  /* height: 90px;
+  display: flex;
+  align-items: center; */
 
 }
 
@@ -107,6 +142,12 @@ body {
   cursor: pointer;
   transform: scale(1.05);
 }
+
+.header-tabs.show:hover {
+  cursor: default;
+  transform: none;
+}
+
 .header-tab {
   /* text-shadow: 0px 0px 1px #000; */
 
@@ -129,14 +170,17 @@ body {
 
 .controls-container div:hover {
   cursor: pointer;
-
+  transform: scale(1.1);
 }
 
 .controls-container div {
   color: #fff;
+  transition: transform .2s;
+
   /* text-shadow: 1px 1px 1px #ccc; */
 
 }
+
 
 div svg.fa-play-circle {
   /* text-shadow: 3px 3px 16px #272634; */

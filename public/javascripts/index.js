@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   // tableHeader.classList.add('table-header');
   // tableContainer.classList.add('table-container');
   // tableContainer.appendChild(tableHeader);
+  let tableHeader = document.createElement('h1');
+  tableHeader.innerHTML = "Mon Jan 15 2018";
+  tableHeader.classList.add('table-header');
+  tableContainer.appendChild(tableHeader);
   let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root);
   headerTabsArray.forEach(headerTabs => {
     tableContainer.appendChild(headerTabs);
@@ -29,18 +33,27 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
   let headerTabs = games.map((game) => {
     let tabs = createTabs(game[1], game[2]);
     tabs.addEventListener('click', ()=>{
+      let backArrow = document.createElement('div');
+      backArrow.classList.add('back-arrow', 'white');
+      backArrow.innerHTML = '<i class="fas fa-arrow-left"></i>'
       // console.log('click!');
       tableContainer.innerHTML = null;
       tableContainer.appendChild(tabs);
       tableContainer.appendChild(controls);
+      tableContainer.appendChild(backArrow)
+
       setBackground(game[1], game[2]);
       const newTabs = tabs.cloneNode(true);
-      newTabs.addEventListener('click', (e) =>{
+      backArrow.addEventListener('click', (e) =>{
         // console.log('also click');
         window.pause();
         let pausePlayButton = document.querySelector('.pause-play');
         pausePlayButton.innerHTML = '<i class="fas fa-play"></i>';
         tableContainer.innerHTML = null;
+        let tableHeader = document.createElement('h1');
+        tableHeader.innerHTML = "Mon Jan 15 2018";
+        tableHeader.classList.add('table-header');
+        tableContainer.appendChild(tableHeader);
         let headerTabsArray = createHeaderTabs(games, tableContainer, controls, root)
         headerTabsArray.forEach(headerTabs => {
           tableContainer.appendChild(headerTabs);
@@ -49,6 +62,7 @@ const createHeaderTabs = function(games, tableContainer, controls, root) {
         window._data.start = false;
         window._data.speed = 8;
       });
+      newTabs.classList.add('show');
       tabs.parentNode.replaceChild(newTabs, tabs);
       runPlayByPlay(game[0], tableContainer);
 
